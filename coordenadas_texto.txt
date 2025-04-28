@@ -1,0 +1,31 @@
+{
+  "posicion_y_inicial": 993,
+  "posicion_x_offset": -356,
+  "ajustes_individuales": [
+    {
+      "x": 810,
+      "y": -89
+    },
+    {
+      "x": 810,
+      "y": -89
+    },
+    {
+      "x": 810,
+      "y": -89
+    },
+    {
+      "x": 623,
+      "y": -89
+    },
+    {
+      "x": 699,
+      "y": -34
+    },
+    {
+      "x": 709,
+      "y": -38
+    }
+  ],
+  "velocidad_movimiento": 10
+}
