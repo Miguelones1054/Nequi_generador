@@ -17,6 +17,7 @@ CORS(app)
 CARPETA_ORIGINALES = "static/imagenes_originales"
 IMAGEN_ORIGINAL = os.path.join(CARPETA_ORIGINALES, "nequi.jpg")
 ARCHIVO_CONFIG = "coordenadas_texto.txt"
+ARCHIVO_FUENTE = "font.ttf"  # Nombre del archivo de fuente personalizada
 
 # Configuración
 COLOR_TEXTO = (31, 7, 33)  # Morado oscuro (#1f0721)
@@ -110,7 +111,25 @@ def cargar_configuracion():
             {"x": 0, "y": 0}   # Estado
         ]
     }
-
+def cargar_fuente(tamano):
+    """Carga la fuente personalizada o una alternativa"""
+    try:
+        # Primero intentar cargar la fuente personalizada
+        if os.path.exists(ARCHIVO_FUENTE):
+            return ImageFont.truetype(ARCHIVO_FUENTE, tamano)
+        
+        # Si no existe, intentar con las fuentes del sistema
+        fuentes = ["arial.ttf", "Arial.ttf", "DejaVuSans.ttf", "calibri.ttf", "Verdana.ttf"]
+        for f in fuentes:
+            try:
+                return ImageFont.truetype(f, tamano)
+            except:
+                continue
+        
+        # Si todo falla, usar la fuente por defecto
+        return ImageFont.load_default()
+    except:
+        return ImageFont.load_default()
 # Generar una imagen de comprobante sin guardarla en disco
 def generar_imagen_comprobante(para, cuanto, numero):
     # Verificar imagen original
@@ -134,20 +153,7 @@ def generar_imagen_comprobante(para, cuanto, numero):
     # Crear objeto para dibujar
     dibujo = ImageDraw.Draw(imagen)
     
-    # Cargar fuente para tamaño completo
-    try:
-        fuentes = ["arial.ttf", "Arial.ttf", "DejaVuSans.ttf", "calibri.ttf", "Verdana.ttf"]
-        fuente = None
-        for f in fuentes:
-            try:
-                fuente = ImageFont.truetype(f, TAMANO_FUENTE)
-                break
-            except:
-                continue
-        if fuente is None:
-            fuente = ImageFont.load_default()
-    except:
-        fuente = ImageFont.load_default()
+    fuente = cargar_fuente(TAMANO_FUENTE)
     
     # Dimensiones
     ancho, alto = imagen.size
