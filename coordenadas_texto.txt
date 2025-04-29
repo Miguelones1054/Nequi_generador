@@ -4,7 +4,7 @@
   "ajustes_individuales": [
     {
       "x": 815,
-      "y": -84
+      "y": -78
     },
     {
       "x": 812,
