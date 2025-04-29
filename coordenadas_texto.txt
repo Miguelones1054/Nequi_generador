@@ -1,5 +1,5 @@
 {
-  "posicion_y_inicial": 993,
+  "posicion_y_inicial": 960,
   "posicion_x_offset": -356,
   "ajustes_individuales": [
     {
