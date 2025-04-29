@@ -9,6 +9,7 @@ import time
 import hashlib
 import io
 import base64
+import pytz  # Importar pytz para manejar zonas horarias
 
 app = Flask(__name__)
 CORS(app) 
@@ -141,8 +142,12 @@ def generar_imagen_comprobante(para, cuanto, numero):
     
     # Formatear datos
     cuanto_formateado = formatear_moneda(cuanto)
-    fecha_actual = datetime.datetime.now()
+    
+    # Obtener fecha y hora actual en la zona horaria de Colombia
+    zona_horaria = pytz.timezone('America/Bogota')
+    fecha_actual = datetime.datetime.now(zona_horaria)
     fecha_hora = formatear_fecha(fecha_actual)
+    
     referencia = generar_referencia()
     
     # Abrir imagen original a tamaño completo
